@@ -1,0 +1,1 @@
+projeto full stack feito com React + Next
