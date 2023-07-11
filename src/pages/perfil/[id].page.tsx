@@ -1,14 +1,13 @@
-import { Container, DataNotFoundBox, MyRatings } from './styles'
-import { RatingBox } from './components/RatingBox'
+import { Content, DataNotFoundBox, MyRatings } from './styles'
 import { Header } from './components/Header'
 import { Analytics } from './components/Analytics'
-import { useQuery } from 'react-query'
-import { api } from '@/lib/axios'
 import { User, Rating, Book } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { Comment } from '@/components/Comment'
+import { useDataFromUser } from '@/hooks/useDataFromUser'
 
-export interface IAnalytics {
+export interface Analytics {
   data: User
   ratings: (Rating & {
     book: Book
@@ -21,65 +20,40 @@ export interface IAnalytics {
 
 export default function Perfil() {
   const [search, setSearch] = useState('')
-
   const router = useRouter()
   const userId = router.query.id as string
 
-  const { data: dataFromUser } = useQuery<IAnalytics>(
-    ['myRatings', userId],
-    async () => {
-      const { data } = await api.get(`/user/${userId}`)
+  const { dataFromUser, ratings } = useDataFromUser({ userId, search })
+  const isThereUserData = dataFromUser?.data
 
-      return data?.analyticsFromUser ?? []
-    }
-  )
-
-  const ratingsFiltered = dataFromUser?.ratings.filter((rating) => {
+  if (isThereUserData) {
     return (
-      rating.book.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
-      rating.book.author.toLowerCase().includes(search.toLocaleLowerCase())
-    )
-  })
+      <Content>
+        <div>
+          <Header setSearch={setSearch} />
 
-  useEffect(() => {
-    if (!userId) {
-      router.push('/')
-    }
-  }, [userId, router])
+          <MyRatings>
+            {ratings?.map((rating) => {
+              return (
+                <Comment.Root key={rating.id} color="default">
+                  <Comment.InfoBook rating={rating} type="compact" />
+                </Comment.Root>
+              )
+            })}
+          </MyRatings>
+        </div>
+
+        <Analytics analytics={dataFromUser} />
+      </Content>
+    )
+  }
 
   return (
-    <Container>
-      {dataFromUser?.data ? (
-        <>
-          <div>
-            <Header setSearch={setSearch} />
-            <MyRatings>
-              {ratingsFiltered?.map((rating) => {
-                return (
-                  <RatingBox
-                    key={rating.id}
-                    name={rating.book.name}
-                    created_at={String(rating.created_at)}
-                    cover_url={rating.book.cover_url}
-                    description={rating.description}
-                    rate={rating.rate}
-                    author={rating.book.author}
-                  />
-                )
-              })}
-            </MyRatings>
-          </div>
-
-          <Analytics analytics={dataFromUser} />
-        </>
-      ) : (
-        <DataNotFoundBox>
-          Você ainda não possui nenhuma leitura, portanto seus dados não foram
-          carregados.
-          <br></br>
-          Faça avaliações para poder guardar suas leituras :)
-        </DataNotFoundBox>
-      )}
-    </Container>
+    <DataNotFoundBox>
+      Você ainda não possui nenhuma leitura, portanto seus dados não foram
+      carregados.
+      <br></br>
+      Faça avaliações para poder guardar suas leituras :)
+    </DataNotFoundBox>
   )
 }

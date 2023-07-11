@@ -6,7 +6,7 @@ import GitHubProvider, { GithubProfile } from 'next-auth/providers/github'
 
 export function buildNextAuthOptions(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ): NextAuthOptions {
   return {
     adapter: PrismaAdapter(req, res),

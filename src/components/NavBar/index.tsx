@@ -24,18 +24,18 @@ export function Navbar() {
     <Container>
       <Menu>
         <Link href={'/'} prefetch={false}>
-          <Image src={logo} alt='' width={128} height={32} />
+          <Image src={logo} alt="" width={128} height={32} />
         </Link>
 
         <List>
-          <Item isActive={router.asPath === '/' ? true : false}>
+          <Item isActive={router.asPath === '/'}>
             <ChartLineUp size={24} />
             <Link href={'/'} prefetch={false}>
               Início
             </Link>
           </Item>
 
-          <Item isActive={router.asPath === '/explorar' ? true : false}>
+          <Item isActive={router.asPath === '/explorar'}>
             <Binoculars size={24} />
             <Link href={'/explorar'} prefetch={false}>
               Explorar
@@ -43,11 +43,7 @@ export function Navbar() {
           </Item>
 
           {authenticated && (
-            <Item
-              isActive={
-                router.asPath === `/perfil/${session?.user.id}` ? true : false
-              }
-            >
+            <Item isActive={router.asPath === `/perfil/${session?.user.id}`}>
               <User size={24} />
               <Link href={`/perfil/${session?.user.id}`} prefetch={false}>
                 Perfil
@@ -61,7 +57,7 @@ export function Navbar() {
         {authenticated && (
           <Image
             src={`${session?.user.avatar_url}`}
-            alt='User Image'
+            alt="User Image"
             width={32}
             height={32}
           />

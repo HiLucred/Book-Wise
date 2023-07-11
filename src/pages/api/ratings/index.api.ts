@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== 'GET') {
     return res.status(400)
@@ -17,7 +17,7 @@ export default async function handler(
       book: true,
       user: true,
     },
-    take: 10
+    take: 10,
   })
 
   res.status(200).json({ ratings })

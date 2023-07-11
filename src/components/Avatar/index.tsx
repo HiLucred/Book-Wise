@@ -12,7 +12,7 @@ export function Avatar({ avatar_url, userId }: AvatarProps) {
   return (
     <Container
       src={avatar_url}
-      alt=''
+      alt=""
       width={32}
       height={32}
       onClick={() => router.push(`/perfil/${userId}`)}

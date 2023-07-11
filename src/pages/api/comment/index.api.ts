@@ -12,7 +12,7 @@ const NewCommentSchema = z.object({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== 'POST') {
     return res.status(400)
@@ -21,7 +21,7 @@ export default async function handler(
   const session = await getServerSession(
     req,
     res,
-    buildNextAuthOptions(req, res)
+    buildNextAuthOptions(req, res),
   )
 
   if (!session) {

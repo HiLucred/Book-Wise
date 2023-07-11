@@ -5,7 +5,7 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     boxSizing: 'border-box',
-    fontFamily: 'Nunito, sans-serif'
+    fontFamily: 'Nunito, sans-serif',
   },
 
   body: {

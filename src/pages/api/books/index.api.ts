@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { prisma } from '@/lib/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
@@ -5,7 +6,7 @@ import { buildNextAuthOptions } from '../auth/[...nextauth].api'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== 'GET') {
     return res.status(405).end()
@@ -36,7 +37,7 @@ export default async function handler(
   const session = await getServerSession(
     req,
     res,
-    buildNextAuthOptions(req, res)
+    buildNextAuthOptions(req, res),
   )
 
   let userBooksIds: string[] = []
@@ -57,7 +58,7 @@ export default async function handler(
 
   const bookWithAvgRating = books.map((book) => {
     const bookWithAvg = booksAvgRating.find(
-      (bookWithAvg) => bookWithAvg.book_id === book.id
+      (bookWithAvg) => bookWithAvg.book_id === book.id,
     )
     const { ratings, ...bookInfo } = book
 

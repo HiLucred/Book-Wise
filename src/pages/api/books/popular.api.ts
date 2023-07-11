@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { prisma } from '@/lib/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== 'GET') {
     return res.status(400)
@@ -35,7 +36,7 @@ export default async function handler(
 
   const booksWithAvgRating = popularBooks.map((book) => {
     const bookAvgRating = booksAvgRating.find(
-      (avgRating) => avgRating.book_id === book.id
+      (avgRating) => avgRating.book_id === book.id,
     )
     const { ratings, ...bookInfo } = book
 

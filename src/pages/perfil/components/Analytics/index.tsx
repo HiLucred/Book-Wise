@@ -1,27 +1,22 @@
 import { Container, Info, PageTitle, Seaparator } from './styles'
 import { Title } from '@/components/Typography'
 import { BookOpen, BookmarkSimple, Books, UserList } from 'phosphor-react'
-import { Data } from './components/Data'
-import {  formatDateToString } from '@/utils/date-fns'
-import { theme } from '../../../../../stitches.config'
-import { IAnalytics } from '../../[id].page'
+import { Data } from '../Data'
+import { formatDateToString } from '@/utils/date-fns'
+import { Analytics } from '../../[id].page'
 import Image from 'next/image'
 
 interface AnalyticsProps {
-  analytics: IAnalytics
+  analytics: Analytics
 }
 
 export function Analytics({ analytics }: AnalyticsProps) {
-  const {
-    colors: { green100 },
-  } = theme
-  
   return (
     <Container>
       <PageTitle>
         <Image
           src={`${analytics.data.avatar_url}`}
-          alt=''
+          alt={`${analytics.data.name}`}
           width={72}
           height={72}
         />
@@ -36,26 +31,21 @@ export function Analytics({ analytics }: AnalyticsProps) {
       <Seaparator />
 
       <Info>
-        <Data
-          title='Páginas lidas'
-          value={analytics.pagesRead}
-          iconName={<BookOpen color={`${green100}`} size={32} />}
-        />
-        <Data
-          title='Livros avaliados'
-          value={analytics.booksRead}
-          iconName={<BookmarkSimple color={`${green100}`} size={32} />}
-        />
-        <Data
-          title='Autores lidos'
-          value={analytics.authorsRead}
-          iconName={<Books color={`${green100}`} size={32} />}
-        />
-        <Data
-          title='Categoria mais lida'
-          value={analytics.categorieMostRead}
-          iconName={<UserList color={`${green100}`} size={32} />}
-        />
+        <Data value={analytics.pagesRead} icon={BookOpen}>
+          Páginas lidas
+        </Data>
+
+        <Data value={analytics.booksRead} icon={BookmarkSimple}>
+          Livros avaliados
+        </Data>
+
+        <Data value={analytics.authorsRead} icon={Books}>
+          Autores lidos
+        </Data>
+
+        <Data value={analytics.categorieMostRead} icon={UserList}>
+          Categoria mais lida
+        </Data>
       </Info>
     </Container>
   )

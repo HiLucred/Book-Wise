@@ -9,6 +9,6 @@ export const Container = styled(Image, {
 
   '&:hover': {
     opacity: 0.8,
-    transition: '0.3s'
-  }
+    transition: '0.3s',
+  },
 })

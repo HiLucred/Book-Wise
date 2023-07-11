@@ -4,13 +4,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== 'GET') {
     return res.status(405).end()
   }
 
-  const userId = String(req.query.id)
+  const userId = req.query.id as string
 
   const data = await prisma.user.findUnique({
     where: {
@@ -34,7 +34,7 @@ export default async function handler(
 
   const pagesRead = ratings.reduce(
     (acc, rating) => rating.book.total_pages + acc,
-    0
+    0,
   )
 
   const authors = ratings?.map((rating) => rating.book.author)

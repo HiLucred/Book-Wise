@@ -4,7 +4,7 @@ export function useCategorieMostRead(categories: string[]) {
       categories.filter((item) => item === elemento).length >
       categories.filter((item) => item === maisCitado).length
         ? elemento
-        : maisCitado
+        : maisCitado,
   )
 
   return categorieMostRead

@@ -18,7 +18,7 @@ export const Hero = styled('div', {
   borderRadius: '$md',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 })
 
 export const LoginContainer = styled('div', {
