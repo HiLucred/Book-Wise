@@ -4,7 +4,7 @@ import { Paragraph, Title } from '../Typography'
 import { Book, Rating, User } from '@prisma/client'
 import { formatDateDistanceToNow } from '@/utils/date-fns'
 import { Stars } from '../Stars'
-import { useShowMore } from '@/hooks/useShowMore'
+import { useShowMore as ShowMore } from '@/hooks/useShowMore'
 
 interface InfoBookCommentProps {
   rating: Rating & {
@@ -50,7 +50,7 @@ export function InfoBookComment({
 
         <Paragraph>
           {maxCharacterLimit
-            ? useShowMore(String(rating.description))
+            ? ShowMore(String(rating.description))
             : rating.description}
         </Paragraph>
       </Text>

@@ -39,7 +39,7 @@ export function Comments({ book }: CommentsProps) {
 
       {book?.ratings.map((rating) => {
         return (
-          <Comment.Root color="default">
+          <Comment.Root key={rating.id} color="default">
             <Comment.Header rating={rating} />
             <Comment.Text>{rating.description}</Comment.Text>
           </Comment.Root>

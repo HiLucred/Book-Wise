@@ -3,16 +3,16 @@ import { getCssText } from '../../stitches.config'
 
 export default function Document() {
   return (
-    <Html lang='pt-BR'>
+    <Html lang="pt-BR">
       <Head>
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href='https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'
-          rel='stylesheet'
+          href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
+          rel="stylesheet"
         />
         <style
-          id='stitches'
+          id="stitches"
           dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
       </Head>

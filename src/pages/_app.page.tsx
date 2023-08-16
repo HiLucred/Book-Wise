@@ -25,7 +25,7 @@ export default function App({
           style={{ width: '98vw', height: '100vh' }}
         >
           {defaultLayout && <Navbar />}
-          
+
           {defaultLayout ? (
             <Layout>
               <Component {...pageProps} />

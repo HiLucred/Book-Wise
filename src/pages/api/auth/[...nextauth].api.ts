@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { PrismaAdapter } from '@/lib/auth/prismaAdapter'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { NextAuthOptions } from 'next-auth'
